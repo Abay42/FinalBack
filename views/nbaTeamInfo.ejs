@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <title>NBA Team Information</title>
+</head>
+<body>
+  <nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/nba">NBA Players</a></li>
+    </ul>
+</nav>
+  <h1>NBA Team Information</h1>
+  <form action="/nbaTeamInfo" method="get">
+    <label for="teamId">Enter Team ID: </label>
+    <input type="text" id="teamId" name="ID" required>
+    <button type="submit">Get Team Information</button>
+  </form>
+  <% if (nbaData) { %>
+    <h2>Team Name: <%= nbaData.full_name %></h2>
+    <p>Abbreviation: <%= nbaData.abbreviation %></p>
+    <p>City: <%= nbaData.city %></p>
+    <p>Conference: <%= nbaData.conference %></p>
+    <p>Division: <%= nbaData.division %></p>
+  <% } else { %>
+    <p>No NBA team data available.</p>
+  <% } %>
+</body>
+</html>

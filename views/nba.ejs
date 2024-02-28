@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA players</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+</head>
+<body>
+    <nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/nba">NBA Players</a></li>
+    </ul>
+</nav>
+    <h1>NBA Data</h1>
+    <form action="/nba" method="get">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name">
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name">
+        <button type="submit">Search</button>
+    </form>
+    <% if (nbaData && nbaData.length > 0) { %>
+    <ul>
+        <% nbaData.forEach((player) => { %>
+            <li>
+                Player: <%= player.first_name %> <%= player.last_name %><br>
+                Team: <%= player.team ? player.team.full_name : 'N/A' %><br>
+                Jersey Number: <%= player.jersey_number %><br>
+                Position: <%= player.position %><br>
+                Height: <%= player.height %><br>
+                Weight: <%= player.weight %><br>
+                College: <%= player.college %><br>
+                Draft Year: <%= player.draft_year %><br>
+            </li>
+        <% }); %>
+    </ul>
+<% } else { %>
+    <p>Write player's name correctly please</p>
+<% } %>
+
+</body>
+</html>

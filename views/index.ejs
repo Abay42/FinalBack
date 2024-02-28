@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NBA official</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyO2bD0J7Lr+ouEWNxFuAq6Bf+5dzP86st" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js" integrity="sha384-X7CAEd9G4L1pLr/8RSU9ZJ6B0y32FdYJspOLf5vHTnFW8ebQuLhBDpvCWh+rdi2w" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyO2bD0J7Lr+ouEWNxFuAq6Bf+5dzP86st" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <span class="navbar-toggler-icon"></span>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/nba">NBA Players</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Signup</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <h1>NBA official data</h1> 
+      <form action="/nbaTeamInfo" method="get">
+        <label for="teamId">Enter Team ID: </label>
+        <input type="text" id="teamId" name="ID" required>
+        <button type="submit">Get Team Information</button>
+      </form> 
+      <form action="/nba" method="get">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name">
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name">
+        <button type="submit">Search The Player</button>
+    </form>
+      <footer>
+        <p>Created by Abay Dyussembayev</p>
+        <p>Group: SE - 2207</p>
+      </footer>
+    </div>
+    <div id="carousel-container" class="carousel slide" data-ride="carousel">
+    </div> 
+<script>
+  fetch('/api/carousel')
+    .then(response => response.json())
+    .then(data => {
+      const carouselContainer = document.getElementById('carousel-container');
+
+      data.items.forEach(item => {
+        const carouselItem = document.createElement('div');
+        carouselItem.className = 'carousel-item';
+
+        item.images.forEach(image => {
+          const img = document.createElement('img');
+          img.className = 'd-block w-100';
+          img.style.maxHeight = '200px';
+          img.style.maxWidth = '350px'
+          img.src = image;
+          carouselItem.appendChild(img);
+        });
+
+        carouselContainer.appendChild(carouselItem);
+      });
+
+      $('#carousel-container').carousel();
+    })
+    .catch(error => console.error('Error fetching carousel data:', error));
+</script>
+  </body>
+</html>
